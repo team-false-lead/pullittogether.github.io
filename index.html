@@ -65,7 +65,7 @@
 			<ul class="actions">
 				<li><a href="https://store.steampowered.com/app/4458000" class="icon brands alt fa-steam"><span class="label">Steam</span></a></li>
 				<li><a href="https://www.youtube.com/watch?v=FMlpo9M2eyE" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-				<li><a href="https://linktr.ee/teamfalselead" class="icon brands alt fa-link"><span class="label">Linktree</span></a></li>
+				<li><a href="https://linktr.ee/teamfalselead" class="icon solid alt fa-link"><span class="label">Linktree</span></a></li>
 			</ul>
 		</div>
 
@@ -80,7 +80,7 @@
 						Pull It Together is an online cooperative survival adventure where teams haul a wagon through a procedurally generated wilderness with dynamic encounters while outrunning a massive superstorm. 
 					</p>
 			<p>
-				This page serves as an overview of our major systems with highlights on the team stress director, procedural generation pipeline, multiplayer replication framework, and more! 
+				This page serves as an overview of our major systems with highlights on the wagon, team stress director, level generation, multiplayer framework, and more! 
 				For more information on the design and development process: 
 			</p>
 			<ul class="actions">
@@ -89,7 +89,7 @@
 
 			<ul>
 				<li><strong>Core concept:</strong> cooperative traversal + survival under escalating chase pressure</li>
-				<li><strong>Our focus:</strong> adaptive pacing, deterministic procedural worlds, multiplayer stability, cooperative coordination</li>
+				<li><strong>Our focus:</strong>cooperative coordination, adaptive pacing, deterministic procedural worlds, multiplayer stability</li>
 				<li><strong>Tech:</strong> Godot + C#/GDScript/Shaders + custom tools/pipelines</li>
 			</ul>
 
@@ -112,55 +112,46 @@
 					<header class="major">
 						<h3>Wagon Friend</h3>
 					</header>
-					<p>
-						Pull It Together is an online cooperative survival adventure where teams haul a wagon through a procedurally generated wilderness with dynamic encounters while outrunning a massive superstorm. 
-					</p>
-				</div>
-			</div>
-		</section>
-
-		<section id="stress-director">
-			<a class="image">
-				<img src="assets/images/WildernessTrimmed.gif" alt="Stress director diagram and encounter timeline" data-position="center center" />
-			</a>
-			<div class="content">
-				<div class="inner">
-					<header class="major">
-						<h3>Team Stress Director &amp;<br>Dynamic Encounter Systems</h3>
-					</header>
 
 					<p>
-						Adaptive pacing director that evaluates team condition vs a target difficulty curve and selects encounters to maintain an escalating, fair chase.
+						The wagon as the core element uses a custom physics-based system where handling, condition, interactions, and visual feedback are tightly controlled to produce intuitive, cooperative coordination under stress.
 					</p>
 
 					<ul>
-						<li><strong>Stress inputs:</strong> health/stamina/down states, wagon condition, inventory/mitigation, storm proximity, recent encounters, terrain severity</li>
-						<li><strong>Selector:</strong> weighted encounter pool (attacks, recovery moments, weather events, “wacky” encounters)</li>
-						<li><strong>Storm adaptation:</strong> speed and escalation remains reactive without hard spikes</li>
+						<li><strong>Fake-but-stable physics:</strong> linear and angular velocity are constrained to mimic wheels while using easy to manage sphere colliders</li>
+						<li><strong>Impulse-aware wear:</strong> progressive wear and terrain impacts damage individual wheels and increase pulling friction once destroyed</li>
+						<li><strong>Audio-Visual Proxy Feedback:</strong> wheel rotation and damage states are driven by velocity, health, and interactions allowing clarity for players</li>
+						<li><strong>World Inventory:</strong> tools, trinkets, and items move through physical hooks, shelves, and space keeping wagon supported actions diagetic and intuitive</li>
+						<li><strong>Pull It Together:</strong> coordinate and synchronize your heaves with the team to pull the wagon with even more efficiency</li>
 					</ul>
 
 				</div>
 			</div>
 		</section>
-
-		<section id="procgen">
-			<a class="image">
-				<img src="assets/images/LevelGenStepsProgress.gif" alt="Procedural trail and terrain generation stages" data-position="center center" />
+		<section id="abstract">
+			<a class="video">
+				<video autoplay loop muted playsinline preload="auto" style="width: 100%;">
+					<source src="assets/images/Pacing-Aware Level Generation with Dynamic Event Control - Demo Video.mp4" type="video/mp4">
+				</video>
 			</a>
 			<div class="content">
 				<div class="inner">
 					<header class="major">
-						<h3>Procedural Trail &amp;<br>Terrain Generation Pipeline</h3>
+						<h3>Stress-Aware AI Director for <br>Level Generation &amp; <br>Dynamic Event Control</h3>
 					</header>
-
 					<p>
-						Deterministic generation pipeline that produces unique runs from a single seed, with trail difficulty tied to the predefined target curve.
+						A unified pacing system where a designer-authored target curve drives both procedural level generation and real-time gameplay control to maintain a consistent dramatic arc.
 					</p>
 
 					<ul>
-						<li><strong>Trail:</strong> difficulty-profiled segments, constrained noise (elevation/steepness/curvature), smoothing for playability</li>
-						<li><strong>Terrain:</strong> shader-based biome blending, constraints from trails/rivers/key areas, deterministic scatters</li>
-						<li><strong>Multiplayer:</strong> host-baked heightmap shared and reconstructed across clients</li>
+						<li><strong>Single source of truth:</strong> a target pacing curve defines both terrain difficulty and runtime encounter pressure</li>
+						<li><strong>Segmented generation:</strong> trails are built from difficulty profiles mapped directly from the pacing curve</li>
+						<li><strong>Constraint-driven terrain:</strong> elevation, curvature, and obstacles are generated to reinforce intended difficulty progression</li>
+						<li><strong>Stress feedback loop:</strong> observed team stress is continuously compared against the target curve</li>
+						<li><strong>Event alignment:</strong> encounters are selected based on their ability to correct deviation from the desired pacing</li>
+						<li><strong>Environmental control:</strong> systems like storm speed dynamically adjust to apply pressure or allow recovery</li>
+						<li><strong>Deterministic + reactive:</strong> structure is pre-shaped at generation, then refined through runtime adaptation</li>
+						<li><strong>Extended Abstract:</strong> <a href="https://drive.google.com/drive/folders/1ckusHYaTxewva6XVxBxLwEZSRACWS6Gb?usp=drive_link" class="button small">Google Drive</a></li>
 					</ul>
 
 				</div>
@@ -188,6 +179,31 @@
 						<li><strong>Proxies:</strong> local visual proxies reduce jitter for held items</li>
 						<li><strong>Join-in-progress:</strong> full state reconstruction for new peers</li>
 						<li><strong>Cleanup:</strong> authority resets, proxies freed, dictionaries trimmed on disconnect</li>
+					</ul>
+
+				</div>
+			</div>
+		</section>
+
+		<section id="effects">
+			<a class="image">
+				<img src="assets/images/effects.gif" alt="status effect icons" data-position="center center" />
+			</a>
+			<div class="content">
+				<div class="inner">
+					<header class="major">
+						<h3>Status Effects</h3>
+					</header>
+
+					<p>
+						This system turns many gameplay modifiers into a compact, extendable layer that supports flexible systemic balancing and unique mechanic designs.
+					</p>
+
+					<ul>
+						<li><strong>Data-driven effects:</strong> each effect is defined as a resource with tunable duration, stat changes, multipliers, icons, etc.</li>
+						<li><strong>Broad coverage:</strong> effects can modify health, stamina, movement, resources, and other game mechanics</li>
+						<li><strong>Expandable:</strong> trinkets, consumables, and others can apply effects through the same framework allowing special-case logic and avoiding many separate systems</li>
+						<li><strong>Repeatable:</strong> one-time, recurring, and stacked effects are all handled with this framework</li>
 					</ul>
 
 				</div>
@@ -229,11 +245,9 @@
 					</header>
 
 					<ul>
-						<li><strong>Gameplay:</strong> inventories/slotting, rope heaving/tethering, harvesting, interaction frameworks</li>
-						<li><strong>NPC AI:</strong> animal behavior trees and encounter behaviors</li>
+						<li><strong>NPC AI:</strong> animal behavior trees and encounter logic</li>
 						<li><strong>Tech art:</strong> terrain heightmaps, storm clouds, weather event visuals, biome blending</li>
-						<li><strong>Multiplayer/backend:</strong> Steamworks integration, menu flow, plugin integration, custom engine build</li>
-						<li><strong>Team support:</strong> debugging/refactoring, tools for iteration, performance profiling, stability improvements</li>
+						<li><strong>Multiplayer/backend:</strong> Steamworks integration, LAN support</li>
 					</ul>
 
 				</div>
@@ -246,7 +260,7 @@
 	<section id="team">
 		<div class="inner">
 			<header class="major">
-				<h2>Meet The Team<br>
+				<h2>Meet Team False Lead<br>
 					<h3>
 						<br><a class="button" href="https://www.linkedin.com/in/leo-schindler-gerendasi/" target="_blank" rel="noopener">Producer: Leo Schindler-Gerendasi</a><br>
 						<br><a class="button" href="https://www.linkedin.com/in/jack-keegan-29707321b/" target="_blank" rel="noopener">Gameplay Designer: Jack Keegan</a><br>
@@ -268,7 +282,7 @@
 							<ul class="icons">
 								<li><a href="https://store.steampowered.com/app/4458000" class="icon brands alt fa-steam"><span class="label">Steam</span></a></li>
 								<li><a href="https://www.youtube.com/@TeamFalseLead" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-								<li><a href="https://linktr.ee/teamfalselead" class="icon brands alt fa-link"><span class="label">Linktree</span></a></li>
+								<li><a href="https://linktr.ee/teamfalselead" class="icon solid alt fa-link"><span class="label">Linktree</span></a></li>
 							</ul>
 							<ul class="copyright">
 								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
